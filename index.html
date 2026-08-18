@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BogotaFitDeals | Reebok Rapid Strike WebAR</title>
+
+  <script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --color-principal: #111111;
+      --color-secundario: #ffffff;
+      --color-gris: #f1f1f1;
+      --color-promocion: #d71920;
+      --color-whatsapp: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: var(--color-secundario);
+      color: var(--color-principal);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--color-principal);
+      color: var(--color-secundario);
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 3px;
+    }
+
+    header p {
+      margin-top: 5px;
+      color: #dddddd;
+    }
+
+    main {
+      width: min(1100px, 92%);
+      margin: 35px auto;
+    }
+
+    .producto {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .visor {
+      min-height: 500px;
+      background-color: var(--color-gris);
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 500px;
+      background-color: var(--color-gris);
+    }
+
+    .ar-button {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      border: none;
+      border-radius: 30px;
+      padding: 14px 24px;
+      background-color: var(--color-principal);
+      color: var(--color-secundario);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .informacion h2 {
+      font-size: 2.3rem;
+      margin-bottom: 15px;
+    }
+
+    .descripcion {
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .beneficios {
+      margin: 20px 0;
+      padding-left: 22px;
+    }
+
+    .beneficios li {
+      margin-bottom: 10px;
+    }
+
+    .precio-anterior {
+      color: #666666;
+      font-size: 1.1rem;
+      text-decoration: line-through;
+    }
+
+    .precio-actual {
+      color: var(--color-promocion);
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      display: inline-block;
+      background-color: var(--color-promocion);
+      color: var(--color-secundario);
+      padding: 15px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta:hover {
+      opacity: 0.8;
+    }
+
+    .redes {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .red-social {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .instagram {
+      background-color: #e1306c;
+    }
+
+    .facebook {
+      background-color: #1877f2;
+    }
+
+    .tiktok {
+      background-color: #111111;
+    }
+
+    .whatsapp {
+      background-color: var(--color-whatsapp);
+    }
+
+    .qr-section {
+      margin-top: 45px;
+      padding: 30px;
+      background-color: var(--color-gris);
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    #qrCode {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      background-color: var(--color-principal);
+      color: var(--color-secundario);
+      text-align: center;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 800px) {
+      .producto {
+        grid-template-columns: 1fr;
+      }
+
+      .visor,
+      model-viewer {
+        min-height: 400px;
+        height: 400px;
+      }
+
+      .informacion h2 {
+        font-size: 1.8rem;
+      }
+
+      .redes {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>BOGOTAFITDEALS</h1>
+    <p>Productos deportivos para tu día a día</p>
+  </header>
+
+  <main>
+
+    <section class="producto">
+
+      <div class="visor">
+
+        <model-viewer
+          src="modelo.glb"
+          alt="Modelo tridimensional de los zapatos Reebok Rapid Strike para hombre"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          ar-placement="floor"
+          ar-scale="auto"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1.2"
+          exposure="1"
+          touch-action="pan-y">
+
+          <button class="ar-button" slot="ar-button" type="button">
+            Ver en mi espacio
+          </button>
+
+        </model-viewer>
+
+      </div>
+
+      <div class="informacion">
+
+        <h2>Reebok Rapid Strike para Hombre</h2>
+
+        <p class="descripcion">
+          Zapatillas deportivas versátiles diseñadas para el uso diario,
+          caminatas, gimnasio, entrenamiento y actividades casuales.
+          Una opción cómoda y práctica para acompañarte durante todo el día.
+        </p>
+
+        <ul class="beneficios">
+
+          <li>
+            <strong>Resistentes y duraderas:</strong>
+            parte superior sintética que proporciona durabilidad y estructura,
+            junto con el icónico logotipo Reebok Vector.
+          </li>
+
+          <li>
+            <strong>Ligeras y cómodas:</strong>
+            lengüeta de malla transpirable que favorece el flujo de aire
+            para ayudar a mantener los pies frescos.
+          </li>
+
+          <li>
+            <strong>Tracción y amortiguación confiables:</strong>
+            suela exterior de TPR para un agarre confiable y entresuela
+            de EVA para una amortiguación ligera y absorción del impacto.
+          </li>
+
+          <li>
+            <strong>Plantilla de confort extraíble:</strong>
+            plantilla de células abiertas que favorece el flujo de aire
+            y el manejo de la humedad.
+          </li>
+
+          <li>
+            <strong>Opciones de ajuste:</strong>
+            disponibles en anchos medio, ancho y extra ancho,
+            con tallas indicadas de 7 a 16.
+          </li>
+
+        </ul>
+
+        <p class="precio-anterior">
+          Antes: USD 60
+        </p>
+
+        <p class="precio-actual">
+          Ahora: USD 49
+        </p>
+
+        <a
+          class="cta"
+          href="https://www.amazon.com/dp/B0G5BZKZWX?pd_rd_i=B0G5BZKZWX&pf_rd_p=f1e9beb5-f371-4587-80fb-3d96ad74443b&pf_rd_r=M8X4D4NNEWECVS11EKSQ&pd_rd_wg=8aAhr&pd_rd_w=nkotK&pd_rd_r=f970519f-e19e-414f-a199-38a75ae534d7&th=1&psc=1"
+          target="_blank"
+          rel="noopener noreferrer">
+          Comprar ahora
+        </a>
+
+        <div class="redes">
+
+          <a
+            class="red-social instagram"
+            href="https://www.instagram.com/reebokcolombia?igsh=MXFmZzk4czFzemxjZw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer">
+            Instagram
+          </a>
+
+          <a
+            class="red-social facebook"
+            href="https://www.facebook.com/share/1HmLws6nuQ/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer">
+            Facebook
+          </a>
+
+          <a
+            class="red-social tiktok"
+            href="https://www.tiktok.com/@reebok?_r=1&_t=ZS-98zTpz9pJTg"
+            target="_blank"
+            rel="noopener noreferrer">
+            TikTok
+          </a>
+
+          <a
+            class="red-social whatsapp"
+            href="https://wa.me/573124126877?text=Hola%20BogotaFitDeals%2C%20quiero%20recibir%20recomendaciones%20de%20otros%20productos."
+            target="_blank"
+            rel="noopener noreferrer">
+            WhatsApp
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="qr-section">
+
+      <h2>Explora los Reebok Rapid Strike desde tu celular</h2>
+
+      <p>
+        Escanea el código QR para abrir la experiencia WebAR y visualizar
+        el modelo 3D desde un dispositivo compatible.
+      </p>
+
+      <div id="qrCode"></div>
+
+      <p>
+        También puedes usar el botón
+        <strong>“Ver en mi espacio”</strong>
+        para probar la experiencia de realidad aumentada.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <p>
+      <strong>BogotaFitDeals</strong>
+    </p>
+
+    <p>
+      Reebok Rapid Strike · Experiencia comercial WebAR
+    </p>
+
+    <p>
+      Descubre más productos y recomendaciones a través de nuestros canales.
+    </p>
+
+  </footer>
+
+  <script>
+    new QRCode(document.querySelector("#qrCode"), {
+      text: window.location.href,
+      width: 180,
+      height: 180,
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+
+</body>
+</html>
